@@ -21,7 +21,7 @@ def scan_source_code(directory, target_strings=None, additional_strings=None):
         print("No target strings provided.")
         return []
 
-    found_files = []
+    found_lines = []
     for root, dirs, files in os.walk(directory):
         for file in files:
             filepath = os.path.join(root, file)
@@ -30,21 +30,20 @@ def scan_source_code(directory, target_strings=None, additional_strings=None):
                 for line_num, line in enumerate(lines, start=1):
                     for target_string in target_strings:
                         if target_string in line:
-                            found_files.append((filepath, line_num, line.strip(), target_string))
-    return found_files
+                            found_lines.append((filepath, line_num, line.strip(), target_string))
+                            break  # Once a target string is found in a line, no need to check further
+    return found_lines
 
 if __name__ == "__main__":
     directory_to_scan = './build/'
-	# optionally can add strings to the array
-    target_strings = []
+    target_strings = []  # No need to specify any target strings here, as they will be read from additional_strings file
     additional_strings = './.env'
 
-    # Scan source code for target strings
-    found_files = scan_source_code(directory_to_scan, target_strings=target_strings, additional_strings=additional_strings)
+    found_lines = scan_source_code(directory_to_scan, target_strings=target_strings, additional_strings=additional_strings)
 
-    if found_files:
+    if found_lines:
         print("Found the following target strings in the source files:")
-        for file, line_num, line_content, target_string in found_files:
-            print(f"File: {file}, Line: {line_num}, Content: {line_content}, Target: {target_string}")
+        for file, line_num, line_content, target_string in found_lines:
+            print(f"File: {file}, Line: {line_num}, Content: {line_content}")
     else:
         print("No target strings were found in any files.")
