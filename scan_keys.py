@@ -36,10 +36,11 @@ def scan_source_code(directory, target_strings=None, additional_strings=None):
 
 if __name__ == "__main__":
     directory_to_scan = './build/'
-    target_strings = []  # No need to specify any target strings here, as they will be read from additional_strings file
-    additional_strings = './.env'
+    # No need to specify any target strings here, as they will be read from additional_strings_file
+    target_strings = []
+    additional_strings_file = './.env'
 
-    found_lines = scan_source_code(directory_to_scan, target_strings=target_strings, additional_strings=additional_strings)
+    found_lines = scan_source_code(directory_to_scan, target_strings=target_strings, additional_strings=additional_strings_file)
 
     if found_lines:
         print("Found the following target strings in the source files:")
