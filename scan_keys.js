@@ -10,7 +10,6 @@ function getEnvAsArray() {
     }
   }
 
-  global.console.log(envArray);
   return envArray;
 }
 
@@ -52,7 +51,6 @@ function scanSourceCode(directory, staticStrings = [], envVariablesArray = []) {
 }
 
 const directoryToScan = './build';
-// const staticStrings = [' react-mount-point-unstable '];
 const staticStrings = [];
 const envVariablesArray = getEnvAsArray();
 
@@ -64,9 +62,9 @@ const foundLines = scanSourceCode(
 
 if (foundLines.length > 0) {
   console.log('Found the following strings in the source files:');
-  //   foundLines.forEach(({ filePath, lineNum, lineContent, targetString }) => {
-  //     console.log(`File: ${filePath}, Line: ${lineNum}, Content: ${lineContent}`);
-  //   });
+  foundLines.forEach(({ filePath, lineNum, lineContent, targetString }) => {
+    console.log(`File: ${filePath}, Line: ${lineNum}, Content: ${lineContent}`);
+  });
 } else {
   console.log('No strings were found in any files.');
 }
