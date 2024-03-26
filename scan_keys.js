@@ -1,16 +1,15 @@
 const fs = require('fs');
-
 require('dotenv').config();
 
-function getEnvAsArray() {
-  const envArray = [];
+function getEnvVariablesAsArray() {
+  const variables = [];
   for (let key in process.env) {
     if (process.env.hasOwnProperty(key)) {
-      envArray.push(process.env[key]);
+      const value = process.env[key];
+      variables.push(value);
     }
   }
-
-  return envArray;
+  return variables;
 }
 
 function scanSourceCode(directory, staticStrings = [], envVariablesArray = []) {
@@ -52,7 +51,7 @@ function scanSourceCode(directory, staticStrings = [], envVariablesArray = []) {
 
 const directoryToScan = './build';
 const staticStrings = [];
-const envVariablesArray = getEnvAsArray();
+const envVariablesArray = getEnvVariablesAsArray();
 
 const foundLines = scanSourceCode(
   directoryToScan,

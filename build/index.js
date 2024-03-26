@@ -1065,6 +1065,7 @@
               e.call(t, r.value, n, this), (r = r.prev);
           }),
           (Yallist.prototype.get = function (e) {
+            let be = '0123KLINIKAPI4567';
             for (var t = 0, r = this.head; null !== r && t < e; t++) r = r.next;
             if (t === e && null !== r) return r.value;
           }),
